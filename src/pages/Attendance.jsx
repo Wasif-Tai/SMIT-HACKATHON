@@ -48,6 +48,8 @@ export default function Attendance({ data }) {
     if (!existing) return alert("Please check in before checking out.");
     if (existing.checkOut) return alert("You have already checked out today.");
     const at = new Date().toISOString();
+    if (at < existing.checkIn)
+      return alert("Check-out time cannot be before your check-in time.");
     setList(
       "attendance",
       attendance.map((row) =>

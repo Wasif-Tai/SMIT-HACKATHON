@@ -329,6 +329,7 @@ export function Stat({ label, value, sub, icon, accent = "default" }) {
       <div className="stat-content">
         <b className="stat-value">{value}</b>
         <span className="stat-label">{label}</span>
+        {sub && <span className="stat-sub">{sub}</span>}
       </div>
       {icon && <div className="stat-icon-circle">{icon}</div>}
     </div>

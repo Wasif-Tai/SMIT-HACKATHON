@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Icon } from "./shared.jsx";
 import { dateToday } from "../utils/date.js";
-import { leaveRemaining } from "../utils/store.js";
+import { isWorkday, leaveRemaining, workdays } from "../utils/store.js";
 
 export default function RecordsHelper({ data }) {
   const { session, users, attendance, leaves, company } = data;
@@ -58,10 +58,19 @@ export default function RecordsHelper({ data }) {
       }
       if (q.includes("absent")) {
         const month = today.slice(0, 7);
-        const done = mine.filter(
-          (a) => a.date.startsWith(month) && a.status !== "In progress",
-        ).length;
-        return `Based on recorded workdays so far this month, ${Math.max(0, new Date().getDate() - done)} day(s) have no attendance record. Note: Future scheduled workdays and non-working days are not treated as absences.`;
+        const scheduledDays = workdays(`${month}-01`, today, company);
+        const recordedDays = new Set(
+          mine
+            .filter(
+              (a) =>
+                a.date.startsWith(month) &&
+                a.date <= today &&
+                isWorkday(a.date, company),
+            )
+            .map((a) => a.date),
+        ).size;
+        const absentDays = Math.max(0, scheduledDays - recordedDays);
+        return `Based on your configured schedule through today, ${absentDays} workday(s) this month have no attendance record. Future workdays and non-working days are excluded.`;
       }
     }
     return "I can answer questions about attendance, leave balances, active employees, and recorded hours based on your saved company data. Select one of the suggested prompts below or ask directly.";

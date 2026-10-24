@@ -102,6 +102,8 @@ export default function Dashboard({ data }) {
       if (!current) return alert("Please check in before checking out.");
       if (current.checkOut) return alert("You have already checked out today.");
       const out = new Date().toISOString();
+      if (out < current.checkIn)
+        return alert("Check-out time cannot be before your check-in time.");
       const updated = attendance.map((a) =>
         a.id === current.id
           ? {

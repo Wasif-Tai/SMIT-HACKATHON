@@ -8,11 +8,18 @@ export default function CompanySettings({ data }) {
   const { company, users, session } = data;
   const [form, setForm] = useState({ ...company });
   const [msg, setMsg] = useState("");
+  const [error, setError] = useState("");
   const [pw, setPw] = useState({ old: "", next: "" });
   const [pwmsg, setPwmsg] = useState("");
 
   const save = (e) => {
     e.preventDefault();
+    setError("");
+    setMsg("");
+    if (!form.workingDays?.length) {
+      setError("Choose at least one weekly workday.");
+      return;
+    }
     write(keys.company, {
       ...form,
       grace: Number(form.grace),
@@ -103,6 +110,7 @@ export default function CompanySettings({ data }) {
                 </label>
               ))}
             </fieldset>
+            {error && <p className="error span2">{error}</p>}
             {msg && <p className="success span2">{msg}</p>}
             <button type="submit" className="button primary span2">
               Save configuration

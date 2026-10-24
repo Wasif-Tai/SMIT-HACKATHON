@@ -508,6 +508,11 @@ b, strong {
   align-items: center;
   box-shadow: var(--shadow-xs);
   min-height: 88px;
+  transition: box-shadow 0.16s ease;
+}
+
+.stat-card:hover {
+  box-shadow: var(--shadow-md);
 }
 
 .stat-content {
@@ -597,6 +602,11 @@ b, strong {
   padding-top: 20px;
   box-shadow: var(--shadow-xs);
   min-width: 0;
+  transition: box-shadow 0.16s ease;
+}
+
+.panel:hover {
+  box-shadow: var(--shadow-md);
 }
 
 .panel.full {

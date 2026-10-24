@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Badge, Empty, Icon, PageHead, Table } from "./shared.jsx";
+import { Badge, Empty, Icon, PageHead, Table } from "../components/shared.jsx";
 import {
   attendanceStatus,
   dayKey,

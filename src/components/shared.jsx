@@ -1,31 +1,5 @@
 import React, { useEffect } from "react";
 
-export function Logo({ size = 30, className = "" }) {
-  return (
-    <div
-      className={`brand-mark ${className}`}
-      style={{ width: size, height: size }}
-      aria-hidden="true"
-    >
-      <svg
-        width={Math.round(size * 0.58)}
-        height={Math.round(size * 0.58)}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-      </svg>
-    </div>
-  );
-}
-
 export function Icon({ name, size = 16, className = "" }) {
   const icons = {
     overview: (
@@ -335,6 +309,17 @@ export function PageHead({ title, description, action }) {
       </div>
       {action && <div className="page-head-action">{action}</div>}
     </header>
+  );
+}
+
+export function Field({ label, hint, error, ...props }) {
+  return (
+    <label className="field">
+      <span>{label}</span>
+      <input {...props} />
+      {hint && <small>{hint}</small>}
+      {error && <small className="error">{error}</small>}
+    </label>
   );
 }
 

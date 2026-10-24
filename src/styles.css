@@ -168,16 +168,6 @@ b, strong {
   gap: 10px;
 }
 
-.brand-mark {
-  border-radius: var(--radius-sm);
-  background-color: var(--primary);
-  color: #FFFFFF;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
 .brand-text {
   min-width: 0;
   display: flex;
